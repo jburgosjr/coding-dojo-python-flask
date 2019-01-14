@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Simple Wall: home</title>
+    <style>
+        body{
+            background-image: url({{ url_for('static', filename='background.jpg') }});
+        }
+
+        .trash_button{
+
+            background: url({{ url_for('static', filename='trash_black.png') }});
+            background-position: center;
+            background-size: cover;
+            width: 20px;
+            height:30px;
+            float: right;
+        }
+
+        .ml_ptext{
+            display: inline-block;
+            margin-left: 12px;
+        }
+
+        .left_messages{
+            display: inline-block;
+            margin-left: 60px;
+            margin-top: 20px;
+            width: 500px;
+        }
+
+        .right_messages{
+            display: inline-block;
+            margin-left: 140px;
+            vertical-align: top;
+            margin-top: 20px;
+            width:500px;
+        }
+
+        .message_log{
+            margin-left:20px;
+        }
+
+        .text{
+            width:340px;
+            margin-bottom: 20px;
+            display: inline-block;
+            overflow:auto;
+        }
+
+        .ml_header{
+            margin-bottom: 20px;
+        }
+
+        .send_btn{
+            float:right;
+            margin-bottom: 10px;
+        }
+
+
+       
+    </style>
+  </head>
+  <body>
+        <nav class="navbar navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">
+                        <img src="https://cdn2.codingdojo.com/images/global/coding_dojo_logo_white.png" width="90" height="30" class="d-inline-block align-top" alt="">
+                        Simple Wall
+                </a>
+                <div class="right_align_nav">
+                    <span class="navbar-text text-white ml-auto">
+                            Welcome back {{session['first_name'].title()}}!
+                        </span>
+                    
+                    <a href="/logout"><button class="btn btn-outline-light ml-3" type="button">logout</button></a>
+                </div>
+        </nav>
+
+        <div class="left_messages">
+            <div>
+                <h1 class="ml_header"><small><u>{{count}} message(s) for you, {{session['first_name'].title()}}</u></small></h1>
+                <div class="message_log">
+                    {% for message in messages %}
+                        <h5>{{message['first_name'].title()}} {{message['last_name'].title()}} said on {{message['created_at'].strftime('%m/%d/%Y %I:%M %p')}}:</h5>
+                        <div class='text'>
+                            <p class="ml_ptext">"{{message['message']}}"</p>
+                        </div>
+                        <a href="/delete_message/{{message['id']}}"><button class="btn btn-light trash_button" type="button"></button></a>
+                    {% endfor %}
+                </div>
+                
+            </div>
+
+        </div>
+
+        <div class="right_messages">
+            <h1><small><u>Send a message</u></small></h1>
+            <p>You have sent a total of {{session['sent_msg_cnt']}} message(s) so far</p>
+            {% with messages = get_flashed_messages(category_filter=['send_error']) %}
+                        {% if messages %}
+                                {% for message in messages %}
+
+                                <div class="alert alert-danger" role="alert">
+                                                {{message}}
+                                </div> 
+                                        
+                                {% endfor %}
+                        {% endif %} 
+            {% endwith %}
+            {% with messages = get_flashed_messages(category_filter=['msg_success']) %}
+                        {% if messages %}
+                                {% for message in messages %}
+
+                                <div class="alert alert-success" role="alert">
+                                                {{message}}
+                                </div> 
+                                        
+                                {% endfor %}
+                        {% endif %} 
+            {% endwith %}
+            <div class="form-group">
+                {% for send in sends %}
+                    <form action="/send_message"method='post'>
+                        <label for="exampleFormControlTextarea1"></label>
+                        <p>To: {{send['first_name'].title()}} {{send['last_name'].title()}} <button type="submit" class="btn btn-outline-primary send_btn" name="button" value="{{send['id']}}">Send</button></p>
+                        
+                        <textarea class="form-control" id="message" rows="2" placeholder="message must be less than 250 characters" name='message'></textarea>
+                    </form>
+                {% endfor %}
+            </div>
+
+        </div>
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

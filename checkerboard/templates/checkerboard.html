@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>checkerboard</title>
+        <style>
+            
+            .box1{
+                background-color: red;
+                height:20px;
+                width:20px;
+                border: none;
+
+                
+            }
+
+            .box2{
+                background-color: black;
+                height:20px;
+                width:20px;
+                border: none;
+                
+               
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <table>
+            {%for i in range(input1):%}
+                <tr>
+                    {%for j in range(input2):%}
+                        <td><div class=box{{ (i+j)%2+1}}></div></td>
+                    {%endfor%}
+                </tr>
+            {%endfor%}
+
+        </table>
+
+    </body>
+
+2
+</html>

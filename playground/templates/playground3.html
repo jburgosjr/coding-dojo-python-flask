@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Playground 2</title>
+        <style>
+            body {
+                
+            }
+            h1 {
+                color: maroon;
+                text-align: center;
+            } 
+            div.box{
+                
+                background-color:{{colorChange}};
+                height: 100px;
+                width: 100px;
+                margin: 10px;
+                display: inline-block;
+                border: solid 2px black;
+            }
+
+            div.boxybox{
+                text-align: center;
+            }
+
+        </style>
+        </head>
+        <body>
+                <h1>Welcome</h1>
+                <div class=boxybox>
+                    {%for i in range(repeat):%}
+                    <div class=box></div>
+                    {%endfor%}
+                </div>
+        </body>
+
+</html>

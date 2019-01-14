@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Dojo Survey</title>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <h5>{{message}}</h5>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
+    <form action="/result" method="post">
+        <div class="form-group col-lg-6 col-md-4 col-sm-4">
+            <label for="form-group">Name</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name" name="name">
+          </div>
+          <div class="form-group col-lg-4 col-md-4 col-sm-4">
+            <label for="inputlocation">Locations</label>
+            <select class="form-control" id="dojolocation" name="dojo_location">
+              <option value="San Jose">San Jose</option>
+              <option value="Seattle">Seattle</option>
+              <option value="Los Angeles">Los Angeles</option>
+              <option value="Dallas">Dallas</option>
+              <option value="Tysons Corner">Tysons Corner</option>
+              <option value="Chicago">Chicago</option>
+              <option value="Tulsa">Tulsa</option>
+              <option value="East Bay">East Bay</option>
+            </select>
+          </div>
+          <div class="form-group col-lg-4 col-md-4 col-sm-4">
+            <label for="inputlocation">Favorite Language</label>
+            <select class="form-control" id="favlanguage" name="favlanguage">
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="Swift">Swift</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="ml-3 form-group">
+            <label for="exampleFormControlTextarea1">Comments (Optional)</label>
+            <textarea class="form-control col-lg-6 col-md-4 col-sm-4" id="Comments" rows="3" name="comments"></textarea>
+          </div>
+        <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+      </form>
+
+      
+
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

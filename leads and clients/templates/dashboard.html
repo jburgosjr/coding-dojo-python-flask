@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Dashboard</title>
+    <style>
+      .graph_box{
+        width: 500px;
+        margin-left: 400px;
+      }
+
+      .chart_box{
+        margin-left: 400px;
+        width:400px;
+        margin-bottom: 30px;
+        
+        
+      }
+
+      .navbar{
+        margin-bottom: 10px;
+      }
+
+     
+    </style>
+
+    <script type="text/javascript">
+      window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer",
+        {
+          backgroundColor: null,
+          animationEnabled: true,
+
+          toolTip:{
+            fontColor: "black",   
+			      content: "{name}: {y}"      
+		      },   
+
+          title:{
+            
+            fontFamily: "Impact",
+            fontWeight: "normal"
+          },
+    
+          legend:{
+            verticalAlign: "bottom",
+            horizontalAlign: "center"
+          },
+          data: [
+          {
+            
+			      name: "Leads",
+            //startAngle: 45,
+           indexLabelFontSize: 20,
+           indexLabelFontFamily: "Garamond",
+           indexLabelFontColor: "white",
+           indexLabelLineColor: "white",
+           indexLabelPlacement: "outside",
+           type: "doughnut",
+           showInLegend: true,
+           dataPoints: [
+          {% for client in clients %}
+           {  y:{{client.leads}}, legendText:"{{client.name}}", indexLabel: "{{client.name}}" },
+          {% endfor %} 
+           ]
+         }
+         ]
+       });
+    
+        chart.render();
+      }
+      </script>
+      <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  </head>
+  <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">
+        <img src="https://cdn2.codingdojo.com/images/global/coding_dojo_logo_white.png" width="90" height="30" class="d-inline-block align-top" alt="">
+           Dashboard
+      </a>
+    </nav>
+  <body class="bg-secondary text-white">
+    <div class="chart_box">
+        <div>
+            <h4 class="h4"><u>List of all customers and # of leads:</u></h4>
+        </div>
+        <table class="table table-bordered table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Number of Leads</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for client in clients %}
+                    <tr>
+                      
+                      <td>{{client.name}}</td>
+                      <td>{{client.leads}}</td>
+                    
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+    </div>
+
+    <div class="graph_box">
+      <h4 class="h4"><u>Customers and number of new Leads:</u></h4>
+      <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    </div>
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
